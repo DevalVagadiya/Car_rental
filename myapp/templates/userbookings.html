@@ -1,0 +1,68 @@
+{% extends 'basic.html' %}
+{% load static %}
+
+{% block title %}My Bookings - Car Rental {% endblock %}
+{% block body %}
+
+
+     <!-- Page Header Start -->
+    <div class="container-fluid page-header">
+        <h1 class="display-3 text-uppercase text-white mb-3">My Bookings</h1>
+        <div class="d-inline-flex text-white">
+            <h6 class="text-uppercase m-0"><a class="text-white" href="/">Home</a></h6>
+            <h6 class="text-body m-0 px-3">/</h6>
+            <h6 class="text-uppercase text-body m-0">My Bookings</h6>
+        </div>
+    </div>
+    <!-- Page Header Start -->
+
+<!-- Rent A Car Start -->
+    <div class="container-fluid py-5">
+        <div class="container pt-5 pb-3">
+            <h1 class="display-4 text-uppercase text-center mb-5">View All Bookings</h1>
+            <table class="table table-striped">
+          <thead class="text-primary text-center">
+            <tr>
+              <th scope="col">Booking ID</th>
+              <th scope="col">Vehicle</th>
+              <th scope="col">Owner Contact</th>
+              <th scope="col">Booking Date</th>
+              <th scope="col">Booking From</th>
+              <th scope="col">Booking To</th>
+              <th scope="col">Booking Amount</th>
+              <th scope="col">Payment Mode</th>
+              <th scope="col">Payment Status</th>
+              <th scope="col">Cancel Booking</th>
+            </tr>
+          </thead>
+          <tbody class="text-dark">
+          {% for mb in bookingdata %}
+            <tr>
+              <th scope="row">{{mb.id}}</th>
+              <td>{{mb.vehicle}}</td>
+              <td>{{mb.vehicle.vendor.phone_no}}</td>
+              <td>{{mb.booking_date}}</td>
+              <td>{{mb.booking_from}}</td>
+              <td>{{mb.booking_to}}</td>
+              <td>{{mb.booking_amount}}</td>
+              <td>{{mb.payment_mode}}</td>
+              <td>{{mb.payment_status}}</td>
+              <td>
+                  {% if mb.cancellation_status == "Cancelled" %}
+                  <b>Cancelled</b>
+                  {% else %}
+                  <a href="/cancelbooking/{{mb.id}}">Cancel Booking</a>
+                  {% endif %}
+              </td>
+            </tr>
+          {% endfor %}
+          </tbody>
+        </table>
+
+        </div>
+    </div>
+
+
+    <!-- Rent A Car End -->
+
+{% endblock %}

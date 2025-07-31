@@ -1,0 +1,43 @@
+<style>
+  #messageBox {
+    z-index: 2 !important;
+    position: absolute;
+    width:60%;
+    left:22%;
+    top:140px;
+   }
+
+  @media only screen and (max-width: 600px) {
+  #messageBox {
+    z-index: 2 !important;
+    position: absolute;
+    width:90%;
+    margin:0 auto;
+    left:5%;
+    top:140px;
+   }
+}
+</style>
+
+<div class="message-box" id="alertMessage">
+  {% if messages %}
+  <ul class="messages" id="messageBox">
+    {% for message in messages %}
+    <div class="container-fluid p-0">
+      <div class="alert {{ message.tags }} fade alert-dismissible show" role="alert">
+        {{ message }}
+      </div>
+    </div>
+    {% endfor %}
+  </ul>
+  {% endif %}
+</div>
+
+<script>
+setTimeout(function() {
+    var alertMessage = document.getElementById('alertMessage');
+    if (alertMessage) {
+      alertMessage.style.display = 'none';
+    }
+  }, 5000);
+</script>

@@ -1,0 +1,53 @@
+{% extends 'basic.html' %}
+{% load static %}
+
+{% block title %}Profile - Car Rental {% endblock %}
+{% block body %}
+
+
+     <!-- Page Header Start -->
+    <div class="container-fluid page-header">
+        <h1 class="display-3 text-uppercase text-white mb-3">Profile</h1>
+        <div class="d-inline-flex text-white">
+            <h6 class="text-uppercase m-0"><a class="text-white" href="/">Home</a></h6>
+            <h6 class="text-body m-0 px-3">/</h6>
+            <h6 class="text-uppercase text-body m-0">Profile</h6>
+        </div>
+    </div>
+    <!-- Page Header Start -->
+
+
+    <!-- Contact Start -->
+    <div class="container-fluid py-5">
+        <div class="container pt-5 pb-3">
+            <h1 class="display-4 text-uppercase text-center mb-5">Profile</h1>
+            <div class="row">
+              <div class="col-md-5 column">
+                <img src="/media/{{profiledata.photo}}" class="img-fluid mt-3 radius-image" width="60%" alt="">
+              </div>
+              <div class="col-md-7 column align-self mt-md-0 mt-4">
+                <p class="user_position">{{profiledata.usertype}}</p>
+                <h4 class="user_title agent">
+                  <a href="#url">{{profiledata.name}}</a>
+                </h4>
+                <div class="team-info my-4">
+                  <p>Email : <a href="mailto:{{profiledata.email_id}}"
+                      class="mail">{{profiledata.email_id}}</a></p>
+                  <p>Phone : <a href="tel:{{profiledata.l_id.phone_no}}">{{profiledata.phone_no}}</a></p>
+                  <p>DOB : <a href="#url">{{profiledata.dob}}</a></p>
+                  <p>Address : <a href="#url">{{profiledata.address}}</a></p>
+                  <p>Account verified : <a href="#url">{% if profiledata.is_verified %} Yes {% else %} No {% endif %}</a></p>
+                </div>
+              </div>
+            </div>
+            <div class="row mt-5">
+              <div class="col-12 text-right">
+                <a href="/edituserprofile" class="btn btn-primary p-2 mr-3 mr-lg-2"><span class="text-light font-weight-bold">Edit Profile</span></a>
+                <a href="/changepwdpage" class="btn btn-primary p-2 mr-3"><span class="text-light font-weight-bold">Change Password</span></a>
+              </div>
+            </div>
+        </div>
+    </div>
+    <!-- Contact End -->
+
+{% endblock %}

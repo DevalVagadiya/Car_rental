@@ -1,0 +1,192 @@
+{% extends 'basic.html' %}
+{% load static %}
+
+{% block title %}Home - Car Rental {% endblock %}
+{% block body %}
+
+
+    <!-- Search Start -->
+    <div class="container-fluid bg-white pt-3 px-lg-5">
+        <form action="/searchcar" method="post" enctype="multipart/form-data">
+            {% csrf_token %}
+        <div class="row mx-n2">
+            <div class="col-xl-3 col-lg-6 col-md-6 px-2">
+                <select class="custom-select px-4 mb-3" name="area" style="height: 50px;" required>
+                    {% for a in areadetail %}
+                      <option value="{{a.id}}">{{a.name}}</option>
+                      {% endfor %}
+                </select>
+            </div>
+            <div class="col-xl-3 col-lg-6 col-md-6 px-2">
+                <select class="custom-select px-4 mb-3" name="city" style="height: 50px;" required>
+                    {% for city in citydetail %}
+                      <option value="{{city.id}}">{{city.name}}</option>
+                      {% endfor %}
+                </select>
+            </div>
+            <div class="col-xl-3 col-lg-6 col-md-6 px-2">
+                <select class="custom-select px-4 mb-3" name="state" style="height: 50px;" required>
+                    {% for s in statedetail %}
+                      <option value="{{s.id}}">{{s.name}}</option>
+                      {% endfor %}
+                </select>
+            </div>
+
+            <div class="col-xl-3 col-lg-6 col-md-6 px-2">
+                <button class="btn btn-primary btn-block mb-3" type="submit" style="height: 50px;">Search</button>
+            </div>
+        </div>
+        </form>
+    </div>
+    <!-- Search End -->
+
+
+    <!-- Carousel Start -->
+    <div class="container-fluid p-0" style="margin-bottom: 90px;">
+        <div id="header-carousel" class="carousel slide" data-ride="carousel">
+            <div class="carousel-inner">
+                <div class="carousel-item active">
+                    <img class="w-100" src=" {% static 'img/carousel-1.jpg' %} " alt="Image">
+                    <div class="carousel-caption d-flex flex-column align-items-center justify-content-center">
+                        <div class="p-3" style="max-width: 900px;">
+                            <h4 class="text-white text-uppercase mb-md-3">Rent A Car</h4>
+                            <h1 class="display-1 text-white mb-md-4">Best Rental Cars In Your Location</h1>
+                            <a href="/listings" class="btn btn-primary py-md-3 px-md-5 mt-2">Reserve Now</a>
+                        </div>
+                    </div>
+                </div>
+                <div class="carousel-item">
+                    <img class="w-100" src=" {% static 'img/carousel-2.jpg' %} " alt="Image">
+                    <div class="carousel-caption d-flex flex-column align-items-center justify-content-center">
+                        <div class="p-3" style="max-width: 900px;">
+                            <h4 class="text-white text-uppercase mb-md-3">Rent A Car</h4>
+                            <h1 class="display-1 text-white mb-md-4">Quality Cars with Unlimited Miles</h1>
+                            <a href="/listings" class="btn btn-primary py-md-3 px-md-5 mt-2">Reserve Now</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <a class="carousel-control-prev" href="#header-carousel" data-slide="prev">
+                <div class="btn btn-dark" style="width: 45px; height: 45px;">
+                    <span class="carousel-control-prev-icon mb-n2"></span>
+                </div>
+            </a>
+            <a class="carousel-control-next" href="#header-carousel" data-slide="next">
+                <div class="btn btn-dark" style="width: 45px; height: 45px;">
+                    <span class="carousel-control-next-icon mb-n2"></span>
+                </div>
+            </a>
+        </div>
+    </div>
+    <!-- Carousel End -->
+
+
+    <!-- About Start -->
+    <div class="container-fluid py-5">
+        <div class="container pt-5 pb-3">
+            <h1 class="display-1 text-primary text-center">01</h1>
+            <h1 class="display-4 text-uppercase text-center mb-5">Welcome To <span class="text-primary">Royal Cars</span></h1>
+            <div class="row justify-content-center">
+                <div class="col-lg-10 text-center">
+                    <img class="w-75 mb-4" src=" {% static 'img/about.png' %} " alt="">
+                    <p>Justo et eos et ut takimata sed sadipscing dolore lorem, et elitr labore labore voluptua no rebum sed, stet voluptua amet sed elitr ea dolor dolores no clita. Dolores diam magna clita ea eos amet, amet rebum voluptua vero vero sed clita accusam takimata. Nonumy labore ipsum sea voluptua sea eos sit justo, no ipsum sanctus sanctus no et no ipsum amet, tempor labore est labore no. Eos diam eirmod lorem ut eirmod, ipsum diam sadipscing stet dolores elitr elitr eirmod dolore. Magna elitr accusam takimata labore, et at erat eirmod consetetur tempor eirmod invidunt est, ipsum nonumy at et.</p>
+                </div>
+            </div>
+            <div class="row mt-3">
+                <div class="col-lg-4 mb-2">
+                    <div class="d-flex align-items-center bg-light p-4 mb-4" style="height: 150px;">
+                        <div class="d-flex align-items-center justify-content-center flex-shrink-0 bg-primary ml-n4 mr-4" style="width: 100px; height: 100px;">
+                            <i class="fa fa-2x fa-headset text-secondary"></i>
+                        </div>
+                        <h4 class="text-uppercase m-0">24/7 Car Rental Support</h4>
+                    </div>
+                </div>
+                <div class="col-lg-4 mb-2">
+                    <div class="d-flex align-items-center bg-secondary p-4 mb-4" style="height: 150px;">
+                        <div class="d-flex align-items-center justify-content-center flex-shrink-0 bg-primary ml-n4 mr-4" style="width: 100px; height: 100px;">
+                            <i class="fa fa-2x fa-car text-secondary"></i>
+                        </div>
+                        <h4 class="text-light text-uppercase m-0">Car Reservation Anytime</h4>
+                    </div>
+                </div>
+                <div class="col-lg-4 mb-2">
+                    <div class="d-flex align-items-center bg-light p-4 mb-4" style="height: 150px;">
+                        <div class="d-flex align-items-center justify-content-center flex-shrink-0 bg-primary ml-n4 mr-4" style="width: 100px; height: 100px;">
+                            <i class="fa fa-2x fa-map-marker-alt text-secondary"></i>
+                        </div>
+                        <h4 class="text-uppercase m-0">Lots Of Pickup Locations</h4>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- About End -->
+
+    <!-- Rent A Car Start -->
+    <div class="container-fluid py-5">
+        <div class="container pt-5 pb-3">
+            <h1 class="display-1 text-primary text-center">02</h1>
+            <h1 class="display-4 text-uppercase text-center mb-5">Find Your Car</h1>
+            <div class="row">
+                {% for cd in allcardata %}
+                {% if forloop.counter < 7 %}
+                <div class="col-lg-4 col-md-6 mb-2">
+                    <div class="rent-item mb-4">
+                        <img class="mb-4 p-4" src="/media/{{cd.model_photo}}" height="200px" alt="">
+                        <h4 class="text-uppercase mb-4">{{cd.company}} {{cd.model_name}}</h4>
+                        <div class="d-flex justify-content-center mb-4">
+                            <div class="px-2">
+                                <i class="fa fa-car text-primary mr-1"></i>
+                                <span>{{cd.model_year}}</span>
+                            </div>
+                            <div class="px-2 border-left ">
+                                <i class="fa fa-map-marker text-primary mr-1"></i>
+                                <span>{{cd.area}}</span>
+                            </div>
+
+                        </div>
+                        <a class="btn btn-primary px-3" href="/viewcar/{{cd.id}}">&#8377;{{cd.rent_perday}}/Day</a>
+                    </div>
+                </div>
+                {% endif %}
+                {% endfor %}
+            </div>
+        </div>
+    </div>
+    <!-- Rent A Car End -->
+
+
+    <!-- Vendor Start -->
+    <div class="container-fluid py-5">
+        <div class="container py-5">
+            <div class="owl-carousel vendor-carousel">
+                <div class="bg-light p-4">
+                    <img src=" {% static 'img/vendor-1.png' %} " alt="">
+                </div>
+                <div class="bg-light p-4">
+                    <img src=" {% static 'img/vendor-2.png' %} " alt="">
+                </div>
+                <div class="bg-light p-4">
+                    <img src=" {% static 'img/vendor-3.png' %} " alt="">
+                </div>
+                <div class="bg-light p-4">
+                    <img src=" {% static 'img/vendor-4.png' %} " alt="">
+                </div>
+                <div class="bg-light p-4">
+                    <img src=" {% static 'img/vendor-5.png' %} " alt="">
+                </div>
+                <div class="bg-light p-4">
+                    <img src=" {% static 'img/vendor-6.png' %} " alt="">
+                </div>
+                <div class="bg-light p-4">
+                    <img src=" {% static 'img/vendor-7.png' %} " alt="">
+                </div>
+                <div class="bg-light p-4">
+                    <img src=" {% static 'img/vendor-8.png' %} " alt="">
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Vendor End -->
+
+{% endblock %}

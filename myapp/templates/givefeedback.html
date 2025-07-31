@@ -1,0 +1,152 @@
+{% extends 'basic.html' %}
+{% load static %}
+
+{% block title %}Give Feedback - Car Rental {% endblock %}
+{% block body %}
+
+
+
+
+     <!-- Page Header Start -->
+    <div class="container-fluid page-header">
+        <h1 class="display-3 text-uppercase text-white mb-3">Give Feedback</h1>
+        <div class="d-inline-flex text-white">
+            <h6 class="text-uppercase m-0"><a class="text-white" href="/">Home</a></h6>
+            <h6 class="text-body m-0 px-3">/</h6>
+            <h6 class="text-uppercase text-body m-0">Give Feedback</h6>
+        </div>
+    </div>
+    <!-- Page Header Start -->
+
+<!-- Rent A Car Start -->
+    <div class="container-fluid py-5">
+        <div class="container pt-5 pb-3">
+            <h1 class="display-4 text-uppercase text-center mb-5">All Completed Bookings</h1>
+            <table class="table table-striped">
+          <thead class="text-primary text-center">
+            <tr>
+              <th scope="col">Booking ID</th>
+              <th scope="col">Vehicle</th>
+              <th scope="col">Owner Contact</th>
+              <th scope="col">Booking Date</th>
+              <th scope="col">Booking From</th>
+              <th scope="col">Booking To</th>
+              <th scope="col">Booking Amount</th>
+              <th scope="col">Payment Mode</th>
+              <th scope="col">Cancel Status</th>
+              <th scope="col">Give Feedback</th>
+            </tr>
+          </thead>
+          <tbody class="text-dark text-center">
+          {% for mb in completed_bookings %}
+            <tr>
+              <th scope="row">{{mb.id}}</th>
+              <td>{{mb.vehicle}}</td>
+              <td>{{mb.vehicle.vendor.phone_no}}</td>
+              <td>{{mb.booking_date}}</td>
+              <td>{{mb.booking_from}}</td>
+              <td>{{mb.booking_to}}</td>
+              <td>{{mb.booking_amount}}</td>
+              <td>{{mb.payment_mode}}</td>
+              <td>{{mb.cancellation_status}}</td>
+              <td><button type="button" class="btn btn-primary" data-toggle="modal" data-target="#feedbackModal{{mb.id}}">
+                            Give Rating
+                        </button>
+              <div class="modal fade" id="feedbackModal{{mb.id}}" tabindex="-1" role="dialog" aria-labelledby="feedbackModalLabel{{mb.id}}" aria-hidden="true">
+                            <div class="modal-dialog" role="document">
+                                <div class="modal-content">
+                                    <div class="modal-header">
+                                        <h5 class="modal-title" id="feedbackModalLabel{{mb.id}}">Give Feedback</h5>
+                                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                            <span aria-hidden="true">&times;</span>
+                                        </button>
+                                    </div>
+                                    <div class="modal-body">
+                                        <!-- Feedback Form -->
+                                        <form action="/submitfeedback" method="post">
+                                            {% csrf_token %}
+                                            <input type="hidden" name="booking_id" value="{{mb.id}}">
+                                             <div class="form-group">
+                                                <label for="rating">Rating:</label>
+                                                 <input type="hidden" name="star_rating" id="star_rating" value="">
+                                                <!-- Custom star rating using your CSS -->
+                                                <div class="custom-rating" id="rating{{mb.id}}">
+                                                     <i class="fa fa-star" data-value="1"></i>
+                                                    <i class="fa fa-star" data-value="2"></i>
+                                                    <i class="fa fa-star" data-value="3"></i>
+                                                    <i class="fa fa-star" data-value="4"></i>
+                                                    <i class="fa fa-star" data-value="5"></i>
+                                                </div>
+                                            </div>
+                                            <div class="form-group">
+                                                <label for="comment">Comment:</label>
+                                                <textarea class="form-control" id="comment" name="comment" rows="3" required></textarea>
+                                            </div>
+                                            <button type="submit" class="btn btn-primary">Submit Feedback</button>
+                                        </form>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                  <!-- Include Bootstrap Star Rating JS and CSS -->
+
+
+<!-- Initialize Bootstrap Star Rating -->
+
+
+<!-- Your custom CSS for star rating -->
+<style>
+    .custom-rating {
+        display: inline-block;
+        font-size: 1.25rem;
+    }
+
+    .custom-rating i {
+        display: inline-block;
+        margin-right: 4px;
+        color: #ccc; /* Default color for unselected stars */
+    }
+
+    .custom-rating i.selected {
+        color: #f8d205; /* Selected star color */
+    }
+</style>
+
+              </td>
+            </tr>
+
+          {% endfor %}
+
+          </tbody>
+        </table>
+
+        </div>
+    </div>
+
+
+
+<!-- Initialize Bootstrap Star Rating -->
+
+
+    <!-- Rent A Car End -->
+
+{% endblock %}
+{% block js %}
+<script>
+    $(document).ready(function () {
+        // Handle star rating interactions
+        $(".custom-rating i").on("click", function () {
+            var value = $(this).data("value");
+
+            // Change color of stars
+            $(".custom-rating i").removeClass("selected");
+            $(".custom-rating i").filter("[data-value=" + value + "]").addClass("selected");
+
+            $("#star_rating").val(value);
+
+            // Handle your logic when a star is clicked
+            console.log("Clicked on star with value: " + value);
+        });
+    });
+</script>
+{% endblock %}

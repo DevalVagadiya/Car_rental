@@ -1,0 +1,99 @@
+{% extends 'basic.html' %}
+{% load static %}
+
+{% block title %}Log In - Car Rental {% endblock %}
+{% block body %}
+
+
+     <!-- Page Header Start -->
+    <div class="container-fluid page-header">
+        <h1 class="display-3 text-uppercase text-white mb-3">Change Password</h1>
+        <div class="d-inline-flex text-white">
+            <h6 class="text-uppercase m-0"><a class="text-white" href="/">Home</a></h6>
+            <h6 class="text-body m-0 px-3">/</h6>
+            <h6 class="text-uppercase text-body m-0">Login</h6>
+        </div>
+    </div>
+    <!-- Page Header Start -->
+
+
+    <!-- Contact Start -->
+    <div class="container-fluid py-5">
+        <div class="container pt-5 pb-3">
+            <h1 class="display-4 text-uppercase text-center mb-5">Change Password</h1>
+            <div class="row">
+                <div class="col-lg-2 mb-2">
+
+                </div>
+                <div class="col-lg-8 mb-2">
+                    <div class="contact-form bg-light mb-4" style="padding: 30px;">
+                        <form action="/changepwd" method="post" enctype="multipart/form-data">
+                            {% csrf_token %}
+                            <div class="row">
+                                <div class="col-12 form-group">
+                                    <input type="password" name="old" class="form-control p-4" placeholder="Old Password" required="required">
+                                </div>
+                                <div class="col-12 form-group">
+                                    <input type="password" name="password1" class="form-control p-4" placeholder="New Password" required="required">
+                                </div>
+                                <div class="col-12 form-group">
+                                    <input type="password" name="password2" class="form-control p-4" placeholder="Confirm Password" required="required">
+                                </div>
+                                <span id="passwordError" class="error"></span>
+                            </div>
+
+                            <div>
+                                <button class="btn btn-primary py-3 px-5" type="submit">Submit</button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Contact End -->
+
+
+
+<script>
+    function setupFormValidation(formId) {
+      var form = document.getElementById(formId);
+      form.addEventListener('submit', function(event) {
+        // Reset error messages
+        clearErrors(form);
+
+        // Validate password
+        var passwordInput = form.querySelector('[name="password1"]');
+        var password = passwordInput.value.trim();
+        if (password === '') {
+          displayError(form, 'passwordError', 'Password is required');
+          event.preventDefault();
+        } else if (!isValidPassword(password)) {
+          displayError(form, 'passwordError', 'Password should contain at least 1 uppercase, 1 lowercase, 1 number, 1 special character, and be between 8 and 16 characters.');
+          event.preventDefault();
+        }
+      });
+    }
+
+    function isValidPassword(password) {
+      // Password should contain at least 1 uppercase, 1 lowercase, 1 number, 1 special character, and be between 8 and 16 characters.
+      var passwordRegex = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,16}$/;
+      return passwordRegex.test(password);
+    }
+
+    function displayError(form, id, message) {
+      var errorElement = form.querySelector('#' + id);
+      errorElement.textContent = message;
+    }
+
+    function clearErrors(form) {
+      var errorElements = form.getElementsByClassName('error');
+      for (var i = 0; i < errorElements.length; i++) {
+        errorElements[i].textContent = '';
+      }
+    }
+
+    setupFormValidation('registerform');
+</script>
+
+{% endblock %}

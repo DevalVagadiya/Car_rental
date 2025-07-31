@@ -1,0 +1,127 @@
+{% extends 'basic.html' %}
+{% load static %}
+
+{% block title %}Sign Up - Car Rental {% endblock %}
+{% block body %}
+
+
+     <!-- Page Header Start -->
+    <div class="container-fluid page-header">
+        <h1 class="display-3 text-uppercase text-white mb-3">Sign Up</h1>
+        <div class="d-inline-flex text-white">
+            <h6 class="text-uppercase m-0"><a class="text-white" href="/">Home</a></h6>
+            <h6 class="text-body m-0 px-3">/</h6>
+            <h6 class="text-uppercase text-body m-0">Sign Up</h6>
+        </div>
+    </div>
+    <!-- Page Header Start -->
+
+
+    <!-- Contact Start -->
+    <div class="container-fluid py-5">
+        <div class="container pt-5 pb-3">
+            <h1 class="display-4 text-uppercase text-center mb-5">Sign Up</h1>
+            <div class="row">
+                <div class="col-lg-2 mb-2">
+
+                </div>
+                <div class="col-lg-8 mb-2">
+                    <div class="contact-form bg-light mb-4" style="padding: 30px;">
+                        <form action="/viewdata" method="post" id="registerform" enctype="multipart/form-data">
+                                {% csrf_token %}
+                            <div class="row">
+                                <div class="col-6 form-group">
+                                    <input type="text" name="name" class="form-control p-4" placeholder="Your Name" required="required">
+                                </div>
+                                <div class="col-6 form-group">
+                                    <input type="tel" name="phone" pattern="[6789][0-9]{9}"  class="form-control p-4" placeholder="Your Phone" required="required">
+                                </div>
+                                <div class="col-12 form-group">
+                                    <input type="email" name="email" class="form-control p-4" placeholder="Your Email" required="required">
+                                </div>
+                                <div class="col-12 form-group">
+                                    <input type="password" name="password" class="form-control p-4" placeholder="Create Password" required="required">
+                                    <span id="passwordError" class="error"></span>
+
+                                </div>
+
+                                <div class="col-6 form-group">
+                                    <label for="dob">Date of birth:</label>
+                                    <input id="dob" name="dob" type="date" class="form-control p-3" style="height:50px" max="2050-01-01" placeholder="" required="required">
+                                </div>
+                                <div class="col-6 form-group">
+                                    <label for="pp">You are:</label>
+                                    <select id="usertype" name="usertype" style="height:50px" class="form-control p-2">
+                                      <option value="Lessor">Vehicle Owner</option>
+                                      <option value="Lessee">Vehicle Renter</option>
+                                    </select>
+                                </div>
+
+                                <div class="col-12 form-group">
+                                    <label for="pp">Profile Picture:</label>
+                                    <input id="pp" name="pp" type="file" class="form-control p-2" style="height:50px" accept="image/*" required="required">
+                                </div>
+                                <div class="col-12 form-group">
+                                    <input type="text" name="address" class="form-control p-4" placeholder="Your Address" required="required">
+                                </div>
+
+                            </div>
+
+                            <div>
+                                <button class="btn btn-primary py-3 px-5" type="submit">Register</button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+    <!-- Contact End -->
+
+
+<script>
+    function setupFormValidation(formId) {
+      var form = document.getElementById(formId);
+      form.addEventListener('submit', function(event) {
+        // Reset error messages
+        clearErrors(form);
+
+        // Validate password
+        var passwordInput = form.querySelector('[name="password"]');
+        var password = passwordInput.value.trim();
+        if (password === '') {
+          displayError(form, 'passwordError', 'Password is required');
+          event.preventDefault();
+        } 
+        else if (!isValidPassword(password)) {
+          displayError(form, 'passwordError', 'Password should contain at least 1 uppercase, 1 lowercase, 1 number, 1 special character, and be between 8 and 16 characters.');
+          event.preventDefault();
+        }
+      });
+    }
+
+    function isValidPassword(password) {
+      // Password should contain at least 1 uppercase, 1 lowercase, 1 number, 1 special character, and be between 8 and 16 characters.
+      var passwordRegex = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,16}$/;
+      return passwordRegex.test(password);
+    }
+
+    function displayError(form, id, message) {
+      var errorElement = form.querySelector('#' + id);
+      errorElement.textContent = message;
+    }
+
+    function clearErrors(form) {
+      var errorElements = form.getElementsByClassName('error');
+      for (var i = 0; i < errorElements.length; i++) {
+        errorElements[i].textContent = '';
+      }
+    }
+
+    setupFormValidation('registerform');
+</script>
+
+
+
+{% endblock %}

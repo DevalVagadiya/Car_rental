@@ -1,0 +1,54 @@
+{% extends 'basic.html' %}
+{% load static %}
+
+{% block title %}Log In - Car Rental {% endblock %}
+{% block body %}
+
+
+     <!-- Page Header Start -->
+    <div class="container-fluid page-header">
+        <h1 class="display-3 text-uppercase text-white mb-3">Login</h1>
+        <div class="d-inline-flex text-white">
+            <h6 class="text-uppercase m-0"><a class="text-white" href="/">Home</a></h6>
+            <h6 class="text-body m-0 px-3">/</h6>
+            <h6 class="text-uppercase text-body m-0">Login</h6>
+        </div>
+    </div>
+    <!-- Page Header Start -->
+
+
+    <!-- Contact Start -->
+    <div class="container-fluid py-5">
+        <div class="container pt-5 pb-3">
+            <h1 class="display-4 text-uppercase text-center mb-5">Login</h1>
+            <div class="row">
+                <div class="col-lg-2 mb-2">
+
+                </div>
+                <div class="col-lg-8 mb-2">
+                    <div class="contact-form bg-light mb-4" style="padding: 30px;">
+                        <form action="/checkuser" method="post" enctype="multipart/form-data">
+                            {% csrf_token %}
+                            <div class="row">
+
+                                <div class="col-12 form-group">
+                                    <input type="email" name="email" class="form-control p-4" placeholder="Your Email" required="required">
+                                </div>
+                                <div class="col-12 form-group">
+                                    <input type="password" name="password" class="form-control p-4" placeholder="Your Password" required="required">
+                                </div>
+                            </div>
+                            <div>
+                                <button class="btn btn-primary py-3 px-5" type="submit">Sign In</button>
+                            </div>
+                            <a href="/forgotpasswordpage">Forgot Password?</a>
+                        </form>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+    <!-- Contact End -->
+
+{% endblock %}

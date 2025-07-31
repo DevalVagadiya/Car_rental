@@ -1,0 +1,52 @@
+{% extends 'basic.html' %}
+{% load static %}
+
+{% block title %}Search Result - Car Rental {% endblock %}
+{% block body %}
+
+
+     <!-- Page Header Start -->
+    <div class="container-fluid page-header">
+        <h1 class="display-3 text-uppercase text-white mb-3">Search Result</h1>
+        <div class="d-inline-flex text-white">
+            <h6 class="text-uppercase m-0"><a class="text-white" href="/">Home</a></h6>
+            <h6 class="text-body m-0 px-3">/</h6>
+            <h6 class="text-uppercase text-body m-0">Search Result</h6>
+        </div>
+    </div>
+    <!-- Page Header Start -->
+
+<!-- Rent A Car Start -->
+    <div class="container-fluid py-5">
+        <div class="container pt-5 pb-3">
+            <h1 class="display-4 text-uppercase text-center mb-5">Search Result</h1>
+            <div class="row">
+                {% for cd in fetchveh %}
+                <div class="col-lg-4 col-md-6 mb-2">
+                    <div class="rent-item mb-4">
+                        <img class="mb-4 p-4" src="/media/{{cd.model_photo}}" height="200px" alt="">
+                        <h4 class="text-uppercase mb-4">{{cd.company}} {{cd.model_name}}</h4>
+                        <div class="d-flex justify-content-center mb-4">
+                            <div class="px-2">
+                                <i class="fa fa-car text-primary mr-1"></i>
+                                <span>{{cd.model_year}}</span>
+                            </div>
+                            <div class="px-2 border-left ">
+                                <i class="fa fa-map-marker text-primary mr-1"></i>
+                                <span>{{cd.area}}</span>
+                            </div>
+
+                        </div>
+                        <a class="btn btn-primary px-3" href="/viewcar/{{cd.id}}">&#8377;{{cd.rent_perday}}/Day</a>
+                    </div>
+                </div>
+                {% endfor %}
+            </div>
+
+        </div>
+    </div>
+
+
+    <!-- Rent A Car End -->
+
+{% endblock %}
