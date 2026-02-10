@@ -1,41 +1,94 @@
-🚗 Car Rental Web Application
-    Car Rental is a full-stack web application that allows users to browse, view, and rent cars online with a smooth and responsive user interface. It’s built using modern web technologies and follows best practices for web development.
-✨ Live Demo: https://car-rental-sigma-mocha.vercel.app/
+# 🚗 Car Rental Web Application
 
-🚀 Features
-    Browse Available Cars:
-    - Users can view a catalog of cars with details like model, price, and availability.
-    Responsive UI:
-    - The interface adjusts for all screen sizes — mobile, tablet, and desktop.
-    Booking System:
-    - Users can reserve cars for rental directly through the web interface.
-    Admin Management (if implemented):
-    - Admins can add, edit, or delete car listings (depending on backend support).
+A full-stack **Car Rental Web Application** that allows users to browse, view, and rent cars online with a smooth and responsive user experience.
 
-🧰 Tech Stack
-    Backend: Django (Python) — manages routing, database, and server logic.
-    Frontend: HTML, CSS, SCSS, JavaScript — for structure and interactive UI.
-    Database: SQLite (default Django database)
-    Deployment: Vercel (Frontend / Full Stack Hosting)
+🌐 **Live Demo:**  
+👉 https://car-rental-sigma-mocha.vercel.app/
 
-📦 Getting Started
-  To run this project locally:
-    1) Clone the repository:
-        git clone https://github.com/DevalVagadiya/Car_rental.git
-    2) Create & activate a virtual environment:
-        python -m venv venv
-        source venv/bin/activate
-        venv\Scripts\activate
-    3) Install dependencies:
-        pip install -r requirements.txt
-    4) Apply migrations:
-        python manage.py migrate
-    5) Start the development server:
-        python manage.py runserver
+---
 
-📌 Notes
-    This project uses Django’s default SQLite database (db.sqlite3).
-    Make sure you have Python 3.x installed before setting up.
+## 📌 About The Project
 
-⭐ Support
-    If you find this project useful, please give it a ⭐ on GitHub!
+Car Rental is built using modern web technologies and follows best development practices.  
+It provides an easy-to-use interface for customers to explore available cars and make bookings online.
+
+---
+
+## 🚀 Features
+
+### 🔎 Browse Available Cars
+- View a catalog of cars
+- See details like model, price, and availability
+
+### 📱 Responsive Design
+- Fully responsive UI
+- Works on mobile, tablet, and desktop devices
+
+### 📅 Booking System
+- Users can reserve cars directly through the web interface
+
+### 🛠 Admin Management
+- Add new car listings
+- Edit existing cars
+- Delete cars (based on backend functionality)
+
+---
+
+## 🧰 Tech Stack
+
+| Technology | Description |
+|------------|-------------|
+| **Backend** | Django (Python) |
+| **Frontend** | HTML, CSS, SCSS, JavaScript |
+| **Database** | SQLite (Default Django DB) |
+| **Deployment** | Vercel |
+
+---
+
+## 📂 Project Setup (Run Locally)
+
+Follow these steps to run the project on your local machine:
+
+### 1️⃣ Clone the Repository
+
+```bash
+git clone https://github.com/DevalVagadiya/Car_rental.git
+cd Car_rental
+```
+### 2️⃣ Create & Activate Virtual Environment
+
+### For macOS / Linux:
+
+```bash
+python -m venv venv
+source venv/bin/activate
+```
+### For Windows:
+```bash
+python -m venv venv
+venv\Scripts\activate
+```
+### 3️⃣ Install Dependencies
+```bash
+pip install -r requirements.txt
+```
+
+### 4️⃣ Apply Migrations
+```bash
+python manage.py migrate
+```
+
+### 5️⃣ Run Development Server
+```bash
+python manage.py runserver
+```
+---
+## 📌 Notes
+- Uses Django's default SQLite database (db.sqlite3)
+- Requires Python 3.x
+- Make sure pip is updated before installing dependencies
+
+---
+## ⭐ Support
+#### If you found this project helpful:
+Give it a ⭐ on GitHub!
