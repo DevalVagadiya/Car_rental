@@ -4,7 +4,7 @@ from django.utils.safestring import mark_safe
 class login_table(models.Model):
     name = models.CharField(max_length=100)
     email_id=models.EmailField()
-    phone_no=models.IntegerField()
+    phone_no=models.CharField(max_length=15)
     password = models.CharField(max_length=300, default="admin")
     photo = models.ImageField(upload_to="photos")
     dob = models.DateField()
