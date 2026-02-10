@@ -86,7 +86,7 @@ WSGI_APPLICATION = 'myproject.wsgi.application'
 
 DATABASES = {
     'default': dj_database_url.config(
-        default=os.environ.get('postgresql://car_rental_db_o2wq_user:XQQhabyajeJLevMCD83glZ4ynMflg00S@dpg-d65d3evpm1nc739q5oeg-a.singapore-postgres.render.com/car_rental_db_o2wq')
+        default=os.environ.get('DATABASE_URL')
     )
 }
 
