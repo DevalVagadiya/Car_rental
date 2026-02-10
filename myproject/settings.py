@@ -83,12 +83,10 @@ WSGI_APPLICATION = 'myproject.wsgi.application'
 # https://docs.djangoproject.com/en/5.0/ref/settings/#databases
 
 DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.sqlite3',
-    }
+    'default': dj_database_url.config(
+        default=os.environ.get('postgresql://car_rental_db_o2wq_user:XQQhabyajeJLevMCD83glZ4ynMflg00S@dpg-d65d3evpm1nc739q5oeg-a.singapore-postgres.render.com/car_rental_db_o2wq')
+    )
 }
-
 
 # Password validation
 # https://docs.djangoproject.com/en/5.0/ref/settings/#auth-password-validators
