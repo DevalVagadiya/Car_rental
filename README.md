@@ -3,7 +3,7 @@
 A full-stack **Car Rental Web Application** that allows users to browse, view, and rent cars online with a smooth and responsive user experience.
 
 🌐 **Live Demo:**  
-👉 https://car-rental-sigma-mocha.vercel.app/
+👉 https://car-rental-jkkc.onrender.com
 
 ---
 
