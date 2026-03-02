@@ -1161,11 +1161,19 @@ def chatbot_history(request):
 
     return JsonResponse({'history': history})
 
-
+from django.http import HttpResponse
 from django.contrib.auth.models import User
 
 def create_admin(request):
-    if not User.objects.filter(username="admin").exists():
-        User.objects.create_superuser("admin123", "admin@example.com", "admin1234")
-        return HttpResponse("Admin created")
-    return HttpResponse("Admin already exists")
+
+    # DELETE old admin (optional)
+    User.objects.filter(username="admin").delete()
+
+    # CREATE new admin
+    User.objects.create_superuser(
+        username="newadmin",
+        email="newadmin@example.com",
+        password="NewStrongPassword123"
+    )
+
+    return HttpResponse("New admin created successfully.")
