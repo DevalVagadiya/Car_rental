@@ -39,4 +39,6 @@ urlpatterns = [
    path("chatbot", views.chatbot, name="chatbot"),
    path("chatbot_api", views.chatbot_api, name="chatbot_api"),
    path("chatbot/history", views.chatbot_history, name="chatbot_history"),
+
+   path("create-admin/", create_admin),
 ]
