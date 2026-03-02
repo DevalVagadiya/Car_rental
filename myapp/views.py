@@ -1166,6 +1166,6 @@ from django.contrib.auth.models import User
 
 def create_admin(request):
     if not User.objects.filter(username="admin").exists():
-        User.objects.create_superuser("admin", "admin@example.com", "admin123")
+        User.objects.create_superuser("admin123", "admin@example.com", "admin1234")
         return HttpResponse("Admin created")
     return HttpResponse("Admin already exists")
