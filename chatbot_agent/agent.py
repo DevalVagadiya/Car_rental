@@ -58,6 +58,10 @@ def process_message(user, message):
     if re.search(r"\b(hello|hi|hey)\b", msg):
         return f"Hello {user.name}! How can I assist you today?"
 
+    # Cancel Booking
+    if re.search(r"\bcancel\b", msg):
+        return cancel_booking(user)
+
     # Car Listing / Availability
     if re.search(r"\b(list|show|display|available)\b.*\b(car|cars)\b", msg) or \
        re.search(r"\b(car|cars)\b", msg):
@@ -70,10 +74,6 @@ def process_message(user, message):
     # Booking Status
     if re.search(r"\b(booking\sstatus|my\sbooking|status)\b", msg):
         return check_booking_status(user)
-
-    # Cancel Booking
-    if re.search(r"\bcancel\b", msg):
-        return cancel_booking(user)
 
     # Booking Request
     if re.search(r"\bbook\b", msg):
@@ -159,16 +159,26 @@ def check_booking_status(user):
 # =====================================
 # CANCEL BOOKING
 # =====================================
-def cancel_booking(user):
+def cancel_booking(user, message):
 
-    booking = Booking.objects.filter(user=user, is_confirmed=True).last()
+    bookings = Booking.objects.filter(user=user, is_confirmed=True)
 
-    if not booking:
+    if not bookings.exists():
         return "You have no confirmed bookings."
 
-    booking.is_confirmed = False
-    booking.cancellation_status = "Yes"
-    booking.save()
+    # Try to detect car name in message
+    for booking in bookings:
+        if booking.vehicle.model_name.lower() in message:
+            booking.is_confirmed = False
+            booking.cancellation_status = "Yes"
+            booking.save()
+            return f"Your booking for {booking.vehicle.model_name} has been cancelled."
+
+    # If no specific car mentioned → cancel latest
+    latest_booking = bookings.last()
+    latest_booking.is_confirmed = False
+    latest_booking.cancellation_status = "Yes"
+    latest_booking.save()
 
     return "Your latest booking has been cancelled."
 
