@@ -30,6 +30,7 @@
 </head>
 
 <body>
+    {% csrf_token %}
     <!-- Topbar Start -->
     <div class="container-fluid bg-dark py-3 px-lg-5 d-none d-lg-block">
         <div class="row">
@@ -163,6 +164,7 @@
 
     <!-- Template Javascript -->
     <script src=" {% static 'js/main.js' %} "></script>
+    {% include 'chatbot_widget.html' %}
 </body>
 {% block js %} {% endblock %}
 

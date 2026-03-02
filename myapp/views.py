@@ -7,7 +7,7 @@ from datetime import timedelta
 
 from django.db.models import Sum
 from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
-from .models import login_table,Vehicle, Area,City,State,Booking,Complaint,Feedback
+from .models import login_table,Vehicle, Area,City,State,Booking,Complaint,Feedback,ChatMessage
 
 
 
@@ -1105,5 +1105,60 @@ def updateprofile(request):
                 return redirect('/profile')
 
     return render(request, "index.html")
+
+
+from django.http import JsonResponse
+from chatbot_agent.agent import get_response
+import json
+
+def chatbot(request):
+    try:
+        uid = request.session['log_id']
+        userdata = login_table.objects.get(id=uid)
+        chat_messages = ChatMessage.objects.filter(user=userdata)
+        Owner = False
+        if userdata.usertype == "Lessor":
+            Owner = True
+
+        context = {
+            'userdata': userdata,
+            'Owner': Owner,
+            'chat_messages': chat_messages
+        }
+        return render(request, 'chatbot.html', context)
+    except KeyError:
+        return redirect(login)
+
+
+def chatbot_api(request):
+    if request.method == 'POST':
+        data = json.loads(request.body)
+        message = data.get('message')
+        user_id = request.session.get('log_id')
+
+        if not user_id:
+            return JsonResponse({'error': 'User not logged in'}, status=401)
+
+        if not message:
+            return JsonResponse({'error': 'Empty message received'}, status=400)
+
+        response = get_response(user_id, message)
+        return JsonResponse({'response': response})
+
+    return JsonResponse({'error': 'Invalid request'}, status=400)
+
+
+def chatbot_history(request):
+    user_id = request.session.get('log_id')
+    if not user_id:
+        return JsonResponse({'status': 'unauthorized'})
+
+    messages = ChatMessage.objects.filter(user_id=user_id).order_by('created_at')
+    history = [{
+        'message': msg.message,
+        'response': msg.response
+    } for msg in messages]
+
+    return JsonResponse({'history': history})
 
 

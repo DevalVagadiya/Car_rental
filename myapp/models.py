@@ -67,7 +67,7 @@ class Vehicle(models.Model):
     city = models.ForeignKey(City, on_delete=models.CASCADE)
     state = models.ForeignKey(State, on_delete=models.CASCADE)
     model_photo = models.ImageField(upload_to="photos")
-    rc_book = models.FileField(upload_to="pdfs",default="")
+    rc_book = models.FileField(upload_to="pdfs",default="", null=True, blank=True)
 
     def photos(self):
         return mark_safe('<img src ="{}" width ="100"/>'.format(self.model_photo.url))
@@ -122,4 +122,11 @@ class Contactus(models.Model):
     message = models.CharField(max_length=500)
 
 
+class ChatMessage(models.Model):
+    user = models.ForeignKey(login_table, on_delete=models.CASCADE)
+    message = models.TextField()
+    response = models.TextField()
+    created_at = models.DateTimeField(auto_now_add=True)
 
+    def __str__(self):
+        return f'{self.user.name}: {self.message}'

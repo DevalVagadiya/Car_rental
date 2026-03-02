@@ -1,0 +1,358 @@
+{% load static %}
+<style>
+    .chatbot-toggler {
+        position: fixed;
+        bottom: 30px;
+        right: 35px;
+        outline: none;
+        border: none;
+        height: 50px;
+        width: 50px;
+        display: flex;
+        cursor: pointer;
+        align-items: center;
+        justify-content: center;
+        border-radius: 50%;
+        background: var(--primary);
+        transition: all 0.2s ease;
+        z-index: 999;
+    }
+    body.show-chatbot .chatbot-toggler {
+        transform: rotate(90deg);
+    }
+    .chatbot-toggler span {
+        color: #fff;
+        position: absolute;
+    }
+    .chatbot-toggler span:last-child,
+    body.show-chatbot .chatbot-toggler span:first-child  {
+        opacity: 0;
+    }
+    body.show-chatbot .chatbot-toggler span:last-child {
+        opacity: 1;
+    }
+    .chatbot {
+        position: fixed;
+        right: 35px;
+        bottom: 90px;
+        width: 420px;
+        background: #fff;
+        border-radius: 15px;
+        overflow: hidden;
+        opacity: 0;
+        pointer-events: none;
+        transform: scale(0.5);
+        transform-origin: bottom right;
+        box-shadow: 0 0 128px 0 rgba(0,0,0,0.1),
+                    0 32px 64px -48px rgba(0,0,0,0.5);
+        transition: all 0.1s ease;
+        z-index: 999;
+    }
+    body.show-chatbot .chatbot {
+        opacity: 1;
+        pointer-events: auto;
+        transform: scale(1);
+    }
+    .chatbot header {
+        padding: 16px 0;
+        position: relative;
+        text-align: center;
+        color: #fff;
+        background: var(--primary);
+        box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+    }
+    .chatbot header span {
+        position: absolute;
+        right: 15px;
+        top: 50%;
+        display: none;
+        cursor: pointer;
+        transform: translateY(-50%);
+    }
+    header h2 {
+        font-size: 1.4rem;
+        color: #fff;
+    }
+    .chatbot .chatbox {
+        overflow-y: auto;
+        height: 510px;
+        padding: 30px 20px 100px;
+    }
+    .chatbot :where(.chatbox, textarea)::-webkit-scrollbar {
+        width: 6px;
+    }
+    .chatbot :where(.chatbox, textarea)::-webkit-scrollbar-thumb {
+        background: #ccc;
+        border-radius: 25px;
+    }
+    .chatbox .chat {
+        display: flex;
+        list-style: none;
+    }
+    .chatbox .outgoing {
+        margin: 20px 0;
+        justify-content: flex-end;
+    }
+    .chatbox .incoming span {
+        width: 32px;
+        height: 32px;
+        color: #fff;
+        cursor: default;
+        text-align: center;
+        line-height: 32px;
+        align-self: flex-end;
+        background: var(--primary);
+        border-radius: 4px;
+        margin: 0 10px 7px 0;
+    }
+    .chatbox .chat p {
+        white-space: pre-wrap;
+        padding: 12px 16px;
+        border-radius: 10px 10px 0 10px;
+        max-width: 75%;
+        color: #fff;
+        font-size: 0.95rem;
+        background: var(--dark);
+    }
+    .chatbox .chat p.error {
+        background: #dc3545;
+    }
+    .chatbox .incoming p {
+        border-radius: 10px 10px 10px 0;
+        background: #f2f2f2;
+        color: #000;
+    }
+    .chatbox .chat .typing-animation {
+        display: inline-flex;
+        padding-left: 25px;
+    }
+    .typing-animation .dot {
+        height: 10px;
+        width: 10px;
+        border-radius: 50%;
+        background: #000;
+        margin: 0 3px;
+        opacity: 0.7;
+        animation:-NS-e-a- 1.2s infinite;
+        animation: typing-animation 1.2s infinite
+    }
+    .typing-animation .dot:nth-child(2) {
+        animation-delay: .2s
+    }
+    .typing-animation .dot:nth-child(3) {
+        animation-delay: .4s
+    }
+    @keyframes typing-animation {
+        0%,60%,to {
+            transform: translateY(0)
+        }
+        30% {
+            transform: translateY(-7px)
+        }
+    }
+    .chatbot .chat-input {
+        display: flex;
+        gap: 5px;
+        position: absolute;
+        bottom: 0;
+        width: 100%;
+        background: #fff;
+        padding: 3px 20px;
+        border-top: 1px solid #ddd;
+    }
+    .chat-input textarea {
+        height: 55px;
+        width: 100%;
+        border: none;
+        outline: none;
+        resize: none;
+        max-height: 180px;
+        padding: 15px 15px 15px 0;
+        font-size: 0.95rem;
+    }
+    .chat-input span {
+        align-self: flex-end;
+        color: var(--primary);
+        cursor: pointer;
+        height: 55px;
+        display: flex;
+        align-items: center;
+        font-size: 1.35rem;
+        visibility: hidden;
+    }
+    .chat-input textarea:valid ~ span {
+        visibility: visible;
+    }
+    @media (max-width: 490px) {
+        .chatbot-toggler {
+            right: 20px;
+            bottom: 20px;
+        }
+        .chatbot {
+            right: 0;
+            bottom: 0;
+            height: 100%;
+            border-radius: 0;
+            width: 100%;
+        }
+        .chatbot .chatbox {
+            height: 90%;
+            padding: 25px 15px 100px;
+        }
+        .chatbot .chat-input {
+            padding: 5px 15px;
+        }
+        .chatbot header span {
+            display: inline-block;
+        }
+    }
+</style>
+
+<button class="chatbot-toggler">
+    <span class="fa fa-comment"></span>
+    <span class="fa fa-times"></span>
+</button>
+<div class="chatbot">
+    <header>
+        <h2>Chatbot</h2>
+        <span class="close-btn fa fa-times"></span>
+    </header>
+    <ul class="chatbox">
+        <li class="chat incoming">
+            <span class="fa fa-robot"></span>
+            <p>Hello 👋<br>How can I help you today?</p>
+        </li>
+    </ul>
+    <div class="chat-input">
+        <textarea placeholder="Enter a message..." spellcheck="false" required></textarea>
+        <span id="send-btn" class="fa fa-paper-plane"></span>
+    </div>
+</div>
+
+<script>
+    const chatbotToggler = document.querySelector(".chatbot-toggler");
+    const closeBtn = document.querySelector(".close-btn");
+    const chatbox = document.querySelector(".chatbox");
+    const chatInput = document.querySelector(".chat-input textarea");
+    const sendChatBtn = document.querySelector(".chat-input span");
+
+    let userMessage = null;
+    const API_ENDPOINT = "/chatbot_api";
+    const HISTORY_ENDPOINT = "/chatbot/history";
+    let historyLoaded = false;
+
+    const inputInitHeight = chatInput.scrollHeight;
+    
+    const createChatLi = (message, className) => {
+        const chatLi = document.createElement("li");
+        chatLi.classList.add("chat", `${className}`);
+        let chatContent = className === "outgoing" ? `<p></p>` : `<span class="fa fa-robot"></span><p></p>`;
+        chatLi.innerHTML = chatContent;
+        chatLi.querySelector("p").textContent = message;
+        return chatLi;
+    }
+
+    const getCsrfToken = () => {
+        return document.querySelector('[name=csrfmiddlewaretoken]').value;
+    }
+
+    const showTypingAnimation = () => {
+        const html = `<li class="chat incoming"><span class="fa fa-robot"></span><div class="typing-animation"><div class="dot"></div><div class="dot"></div><div class="dot"></div></div></li>`;
+        chatbox.insertAdjacentHTML("beforeend", html);
+        chatbox.scrollTo(0, chatbox.scrollHeight);
+    }
+
+    const handleIncomingMessage = (message) => {
+        const incomingChatLi = createChatLi(message, "incoming");
+        chatbox.appendChild(incomingChatLi);
+        chatbox.scrollTo(0, chatbox.scrollHeight);
+    }
+
+    const handleOutgoingMessage = () => {
+        userMessage = chatInput.value.trim();
+        if(!userMessage) return;
+
+        chatInput.value = "";
+        chatInput.style.height = `${inputInitHeight}px`;
+
+        const outgoingChatLi = createChatLi(userMessage, "outgoing");
+        chatbox.appendChild(outgoingChatLi);
+        chatbox.scrollTo(0, chatbox.scrollHeight);
+        
+        setTimeout(() => {
+            showTypingAnimation();
+            callChatbotAPI(userMessage);
+        }, 500);
+    }
+
+    const callChatbotAPI = (message) => {
+        fetch(API_ENDPOINT, {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json",
+                "X-CSRFToken": getCsrfToken()
+            },
+            body: JSON.stringify({ message: message })
+        })
+        .then(res => res.json())
+        .then(data => {
+            document.querySelector(".typing-animation")?.parentElement.remove();
+            if(data.response) {
+                handleIncomingMessage(data.response);
+            } else if (data.error) {
+                const errorLi = createChatLi(data.error, "incoming");
+                errorLi.querySelector("p").classList.add("error");
+                chatbox.appendChild(errorLi);
+                chatbox.scrollTo(0, chatbox.scrollHeight);
+            }
+        }).catch(() => {
+            document.querySelector(".typing-animation")?.parentElement.remove();
+            const errorLi = createChatLi("Oops! Something went wrong. Please try again.", "incoming");
+            errorLi.querySelector("p").classList.add("error");
+            chatbox.appendChild(errorLi);
+            chatbox.scrollTo(0, chatbox.scrollHeight);
+        });
+    }
+
+    const loadChatHistory = () => {
+        if (historyLoaded) return;
+        fetch(HISTORY_ENDPOINT)
+        .then(res => res.json())
+        .then(data => {
+            if (data.history) {
+                data.history.forEach(item => {
+                    chatbox.appendChild(createChatLi(item.message, "outgoing"));
+                    chatbox.appendChild(createChatLi(item.response, "incoming"));
+                });
+                chatbox.scrollTo(0, chatbox.scrollHeight);
+            }
+            historyLoaded = true;
+        })
+        .catch(err => {
+            console.error("Failed to load chat history:", err);
+            historyLoaded = true; // Mark as loaded to avoid retries
+        });
+    }
+
+    chatInput.addEventListener("input", () => {
+        chatInput.style.height = `${inputInitHeight}px`;
+        chatInput.style.height = `${chatInput.scrollHeight}px`;
+    });
+
+    chatInput.addEventListener("keydown", (e) => {
+        if(e.key === "Enter" && !e.shiftKey && window.innerWidth > 800) {
+            e.preventDefault();
+            handleOutgoingMessage();
+        }
+    });
+
+    sendChatBtn.addEventListener("click", handleOutgoingMessage);
+    closeBtn.addEventListener("click", () => document.body.classList.remove("show-chatbot"));
+    chatbotToggler.addEventListener("click", () => {
+        document.body.classList.toggle("show-chatbot");
+        if(document.body.classList.contains("show-chatbot")) {
+            loadChatHistory();
+        }
+    });
+
+</script>
