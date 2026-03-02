@@ -1,0 +1,461 @@
+[
+  {
+    "model": "myapp.state",
+    "pk": 1,
+    "fields": { "name": "Karnataka" }
+  },
+  {
+    "model": "myapp.state",
+    "pk": 2,
+    "fields": { "name": "Maharashtra" }
+  },
+  {
+    "model": "myapp.state",
+    "pk": 3,
+    "fields": { "name": "Rajasthan" }
+  },
+  {
+    "model": "myapp.state",
+    "pk": 4,
+    "fields": { "name": "Kerala" }
+  },
+  {
+    "model": "myapp.state",
+    "pk": 5,
+    "fields": { "name": "Punjab" }
+  },
+
+
+  {
+    "model": "myapp.city",
+    "pk": 1,
+    "fields": { "name": "Bengaluru", "state": 1 }
+  },
+  {
+    "model": "myapp.city",
+    "pk": 2,
+    "fields": { "name": "Mumbai", "state": 2 }
+  },
+  {
+    "model": "myapp.city",
+    "pk": 3,
+    "fields": { "name": "Jaipur", "state": 3 }
+  },
+  {
+    "model": "myapp.city",
+    "pk": 4,
+    "fields": { "name": "Kochi", "state": 4 }
+  },
+  {
+    "model": "myapp.city",
+    "pk": 5,
+    "fields": { "name": "Amritsar", "state": 5 }
+  },
+
+
+  {
+    "model": "myapp.area",
+    "pk": 1,
+    "fields": { "name": "Indiranagar", "city": 1 }
+  },
+  {
+    "model": "myapp.area",
+    "pk": 2,
+    "fields": { "name": "Andheri West", "city": 2 }
+  },
+  {
+    "model": "myapp.area",
+    "pk": 3,
+    "fields": { "name": "Malviya Nagar", "city": 3 }
+  },
+  {
+    "model": "myapp.area",
+    "pk": 4,
+    "fields": { "name": "Fort Kochi", "city": 4 }
+  },
+  {
+    "model": "myapp.area",
+    "pk": 5,
+    "fields": { "name": "Ranjit Avenue", "city": 5 }
+  },
+
+
+  {
+    "model": "myapp.login_table",
+    "pk": 1,
+    "fields": {
+      "name": "Arjun Nair",
+      "email_id": "arjun@gmail.com",
+      "phone_no": "9001112233",
+      "password": "admin123",
+      "photo": "photos/user1.jpg",
+      "dob": "1990-05-14",
+      "address": "Indiranagar, Bengaluru",
+      "usertype": "Lessor",
+      "is_verified": true,
+      "comments": "Top Rated Vendor"
+    }
+  },
+  {
+    "model": "myapp.login_table",
+    "pk": 2,
+    "fields": {
+      "name": "Sneha Patil",
+      "email_id": "sneha@gmail.com",
+      "phone_no": "9011223344",
+      "password": "admin123",
+      "photo": "photos/user2.jpg",
+      "dob": "1995-07-19",
+      "address": "Andheri West, Mumbai",
+      "usertype": "Lessee",
+      "is_verified": true,
+      "comments": ""
+    }
+  },
+  {
+    "model": "myapp.login_table",
+    "pk": 3,
+    "fields": {
+      "name": "Rohit Sharma",
+      "email_id": "rohit@gmail.com",
+      "phone_no": "9022334455",
+      "password": "admin123",
+      "photo": "photos/user3.jpg",
+      "dob": "1987-02-10",
+      "address": "Malviya Nagar, Jaipur",
+      "usertype": "Lessor",
+      "is_verified": false,
+      "comments": "Verification Pending"
+    }
+  },
+  {
+    "model": "myapp.login_table",
+    "pk": 4,
+    "fields": {
+      "name": "Meera Iyer",
+      "email_id": "meera@gmail.com",
+      "phone_no": "9033445566",
+      "password": "admin123",
+      "photo": "photos/user4.jpg",
+      "dob": "1998-11-25",
+      "address": "Fort Kochi, Kochi",
+      "usertype": "Lessee",
+      "is_verified": true,
+      "comments": ""
+    }
+  },
+  {
+    "model": "myapp.login_table",
+    "pk": 5,
+    "fields": {
+      "name": "Karan Singh",
+      "email_id": "karan@gmail.com",
+      "phone_no": "9044556677",
+      "password": "admin123",
+      "photo": "photos/user5.jpg",
+      "dob": "1992-09-03",
+      "address": "Ranjit Avenue, Amritsar",
+      "usertype": "Lessee",
+      "is_verified": true,
+      "comments": ""
+    }
+  },
+
+
+  {
+    "model": "myapp.vehicle",
+    "pk": 1,
+    "fields": {
+      "vendor": 1,
+      "company": "Toyota",
+      "model_name": "Innova",
+      "model_year": "2022",
+      "rent_perday": 3000,
+      "location": "Indiranagar",
+      "area": 1,
+      "city": 1,
+      "state": 1,
+      "model_photo": "photos/innova.jpg",
+      "rc_book": "pdfs/innova_rc.pdf"
+    }
+  },
+  {
+    "model": "myapp.vehicle",
+    "pk": 2,
+    "fields": {
+      "vendor": 3,
+      "company": "Hyundai",
+      "model_name": "Creta",
+      "model_year": "2021",
+      "rent_perday": 2200,
+      "location": "Malviya Nagar",
+      "area": 3,
+      "city": 3,
+      "state": 3,
+      "model_photo": "photos/creta.jpg",
+      "rc_book": "pdfs/creta_rc.pdf"
+    }
+  },
+  {
+    "model": "myapp.vehicle",
+    "pk": 3,
+    "fields": {
+      "vendor": 1,
+      "company": "Maruti",
+      "model_name": "Swift",
+      "model_year": "2020",
+      "rent_perday": 1500,
+      "location": "Indiranagar",
+      "area": 1,
+      "city": 1,
+      "state": 1,
+      "model_photo": "photos/swift.jpg",
+      "rc_book": "pdfs/swift_rc.pdf"
+    }
+  },
+  {
+    "model": "myapp.vehicle",
+    "pk": 4,
+    "fields": {
+      "vendor": 3,
+      "company": "Tata",
+      "model_name": "Harrier",
+      "model_year": "2023",
+      "rent_perday": 3200,
+      "location": "Malviya Nagar",
+      "area": 3,
+      "city": 3,
+      "state": 3,
+      "model_photo": "photos/altroz.jpg",
+      "rc_book": "pdfs/altroz_rc.pdf"
+    }
+  },
+  {
+    "model": "myapp.vehicle",
+    "pk": 5,
+    "fields": {
+      "vendor": 1,
+      "company": "Kia",
+      "model_name": "Seltos",
+      "model_year": "2022",
+      "rent_perday": 2500,
+      "location": "Indiranagar",
+      "area": 1,
+      "city": 1,
+      "state": 1,
+      "model_photo": "photos/ertiga.jpg",
+      "rc_book": "pdfs/ertiga_rc.pdf"
+    }
+  },
+
+
+  { 
+    "model": "myapp.booking",
+    "pk": 1,
+    "fields": {
+      "user": 2,
+      "vehicle": 1,
+      "booking_date": "2026-03-01T10:00:00Z",
+      "is_confirmed": true,
+      "booking_from": "2026-03-10T09:00:00Z",
+      "booking_to": "2026-03-12T09:00:00Z",
+      "booking_amount": 6000,
+      "payment_mode": "online",
+      "payment_status": "Done",
+      "cancellation_status": "No"
+    }
+  },
+  {
+    "model": "myapp.booking",
+    "pk": 2,
+    "fields": {
+      "user": 4,
+      "vehicle": 3,
+      "booking_date": "2026-03-02T11:00:00Z",
+      "is_confirmed": true,
+      "booking_from": "2026-03-15T09:00:00Z",
+      "booking_to": "2026-03-17T09:00:00Z",
+      "booking_amount": 3000,
+      "payment_mode": "offline",
+      "payment_status": "Offline",
+      "cancellation_status": "No"
+    }
+  },
+  {
+    "model": "myapp.booking",
+    "pk": 3,
+    "fields": {
+      "user": 5,
+      "vehicle": 5,
+      "booking_date": "2026-03-03T12:00:00Z",
+      "is_confirmed": false,
+      "booking_from": "2026-03-20T09:00:00Z",
+      "booking_to": "2026-03-22T09:00:00Z",
+      "booking_amount": 5000,
+      "payment_mode": "online",
+      "payment_status": "Pending",
+      "cancellation_status": "No"
+    }
+  },
+
+
+  {
+    "model": "myapp.complaint",
+    "pk": 1,
+    "fields": {
+      "user": 2,
+      "vehicle": 1,
+      "description": "The vehicle was not cleaned properly at the time of pickup.",
+      "date": "2026-03-11T12:30:00Z"
+    }
+  },
+  {
+    "model": "myapp.complaint",
+    "pk": 2,
+    "fields": {
+      "user": 4,
+      "vehicle": 3,
+      "description": "AC was not cooling effectively during daytime.",
+      "date": "2026-03-16T14:00:00Z"
+    }
+  },
+  {
+    "model": "myapp.complaint",
+    "pk": 3,
+    "fields": {
+      "user": 5,
+      "vehicle": 5,
+      "description": "There was a delay in handing over the car keys.",
+      "date": "2026-03-21T10:45:00Z"
+    }
+  },
+  {
+    "model": "myapp.complaint",
+    "pk": 4,
+    "fields": {
+      "user": 2,
+      "vehicle": 3,
+      "description": "Fuel tank was not full as mentioned in booking.",
+      "date": "2026-03-18T09:20:00Z"
+    }
+  },
+  {
+    "model": "myapp.complaint",
+    "pk": 5,
+    "fields": {
+      "user": 4,
+      "vehicle": 1,
+      "description": "Minor scratches were present but not informed earlier.",
+      "date": "2026-03-12T15:10:00Z"
+    }
+  },
+
+
+  {
+    "model": "myapp.feedback",
+    "pk": 1,
+    "fields": {
+      "user": 2,
+      "vehicle": 1,
+      "rating": 4,
+      "comment": "Comfortable ride and smooth booking experience.",
+      "date": "2026-03-12T11:00:00Z"
+    }
+  },
+  {
+    "model": "myapp.feedback",
+    "pk": 2,
+    "fields": {
+      "user": 4,
+      "vehicle": 3,
+      "rating": 5,
+      "comment": "Excellent condition and easy pickup process.",
+      "date": "2026-03-17T13:30:00Z"
+    }
+  },
+  {
+    "model": "myapp.feedback",
+    "pk": 3,
+    "fields": {
+      "user": 5,
+      "vehicle": 5,
+      "rating": 3,
+      "comment": "Good vehicle but slight delay in delivery.",
+      "date": "2026-03-23T10:00:00Z"
+    }
+  },
+  {
+    "model": "myapp.feedback",
+    "pk": 4,
+    "fields": {
+      "user": 2,
+      "vehicle": 3,
+      "rating": 4,
+      "comment": "Vehicle performance was good and fuel efficient.",
+      "date": "2026-03-18T16:00:00Z"
+    }
+  },
+  {
+    "model": "myapp.feedback",
+    "pk": 5,
+    "fields": {
+      "user": 4,
+      "vehicle": 1,
+      "rating": 5,
+      "comment": "Highly satisfied with service and support.",
+      "date": "2026-03-13T09:45:00Z"
+    }
+  },
+  
+
+  {
+    "model": "myapp.contactus",
+    "pk": 1,
+    "fields": {
+      "name": "Ankit Verma",
+      "email": "ankit@gmail.com",
+      "subject": "Booking Cancellation",
+      "message": "How can I cancel my booking and get a refund?"
+    }
+  },
+  {
+    "model": "myapp.contactus",
+    "pk": 2,
+    "fields": {
+      "name": "Divya Rao",
+      "email": "divya@gmail.com",
+      "subject": "Vendor Registration",
+      "message": "What documents are required for vendor approval?"
+    }
+  },
+  {
+    "model": "myapp.contactus",
+    "pk": 3,
+    "fields": {
+      "name": "Sanjay Kumar",
+      "email": "sanjay@gmail.com",
+      "subject": "Payment Issue",
+      "message": "My online payment failed but amount was deducted."
+    }
+  },
+  {
+    "model": "myapp.contactus",
+    "pk": 4,
+    "fields": {
+      "name": "Pooja Sharma",
+      "email": "pooja@gmail.com",
+      "subject": "Vehicle Availability",
+      "message": "Is the Toyota Innova available next weekend?"
+    }
+  },
+  {
+    "model": "myapp.contactus",
+    "pk": 5,
+    "fields": {
+      "name": "Manish Gupta",
+      "email": "manish@gmail.com",
+      "subject": "Account Verification",
+      "message": "How long does it take to verify a lessor account?"
+    }
+  }
+]
