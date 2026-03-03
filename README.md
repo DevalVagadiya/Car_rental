@@ -9,8 +9,8 @@ A full-stack **Car Rental Web Application** that allows users to browse, view, a
 
 ## 📌 About The Project
 
-Car Rental is built using modern web technologies and follows best development practices.  
-It provides an easy-to-use interface for customers to explore available cars and make bookings online.
+Car Rental is built using modern web technologies and follows best development practices.
+It provides an easy-to-use interface for customers to explore available cars, make bookings online, and now get instant assistance through an integrated chatbot.
 
 ---
 
@@ -31,6 +31,12 @@ It provides an easy-to-use interface for customers to explore available cars and
 - Add new car listings
 - Edit existing cars
 - Delete cars (based on backend functionality)
+
+### 🤖 AI Chatbot
+- Real-time assistance for users
+- Answers common queries about cars, pricing, and bookings
+- Improves customer engagement and user experience
+- Available directly on the website interface
 
 ---
 
