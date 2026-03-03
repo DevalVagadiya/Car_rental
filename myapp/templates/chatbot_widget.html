@@ -242,7 +242,7 @@
     let historyLoaded = false;
 
     const inputInitHeight = chatInput.scrollHeight;
-    
+
     const createChatLi = (message, className) => {
         const chatLi = document.createElement("li");
         chatLi.classList.add("chat", `${className}`);
@@ -278,7 +278,7 @@
         const outgoingChatLi = createChatLi(userMessage, "outgoing");
         chatbox.appendChild(outgoingChatLi);
         chatbox.scrollTo(0, chatbox.scrollHeight);
-        
+
         setTimeout(() => {
             showTypingAnimation();
             callChatbotAPI(userMessage);
@@ -349,9 +349,16 @@
     sendChatBtn.addEventListener("click", handleOutgoingMessage);
     closeBtn.addEventListener("click", () => document.body.classList.remove("show-chatbot"));
     chatbotToggler.addEventListener("click", () => {
-        document.body.classList.toggle("show-chatbot");
-        if(document.body.classList.contains("show-chatbot")) {
+        const isChatbotShown = document.body.classList.toggle("show-chatbot");
+        if (isChatbotShown) {
             loadChatHistory();
+            setTimeout(() => chatInput.focus(), 100);
+        }
+    });
+     document.addEventListener("click", (event) => {
+        const chatbot = document.querySelector(".chatbot");
+        if (document.body.classList.contains("show-chatbot") && !chatbot.contains(event.target) && !chatbotToggler.contains(event.target)) {
+            document.body.classList.remove("show-chatbot");
         }
     });
 
