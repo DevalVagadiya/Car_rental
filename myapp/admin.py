@@ -1,5 +1,5 @@
 from django.contrib import admin
-from .models import login_table, State, City, Area, Vehicle, Booking, Complaint, Feedback, Contactus
+from .models import login_table, State, City, Area, Vehicle, Booking, Complaint, Feedback, Contactus, ChatMessage
 
 @admin.register(login_table)
 class LoginTableAdmin(admin.ModelAdmin):
@@ -40,3 +40,19 @@ class FeedbackAdmin(admin.ModelAdmin):
 @admin.register(Contactus)
 class ContactusAdmin(admin.ModelAdmin):
     list_display = ['name', 'email','subject','message']
+
+@admin.register(ChatMessage)
+class ChatMessageAdmin(admin.ModelAdmin):
+    list_display = ['user', 'short_message', 'short_response', 'created_at']
+    list_filter = ['user', 'created_at']
+    search_fields = ['user__name', 'message', 'response']
+    readonly_fields = ['user', 'message', 'response', 'created_at']
+    ordering = ['-created_at']
+
+    def short_message(self, obj):
+        return obj.message[:60] + '...' if len(obj.message) > 60 else obj.message
+    short_message.short_description = 'User Message'
+
+    def short_response(self, obj):
+        return obj.response[:60] + '...' if len(obj.response) > 60 else obj.response
+    short_response.short_description = 'Bot Response'
